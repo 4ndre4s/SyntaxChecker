@@ -18,12 +18,8 @@ public class SyntaxChecker {
                     if (leftBracketsInString.isEmpty()) {
                         return false;
                     } else {
-                        try {
-                            if (!(bracketCandidate == Brackets.getBracketPartner(leftBracketsInString.pop()))) {
-                                return false;
-                            }
-                        } catch (NotABracketException e) {
-                            e.printStackTrace();
+                        if (!(bracketCandidate == Brackets.getBracketPartner(leftBracketsInString.pop()))) {
+                            return false;
                         }
                     }
                 }
@@ -51,13 +47,13 @@ public class SyntaxChecker {
             return bracketPartners.containsValue(bracketCandidate);
         }
 
-        static Character getBracketPartner(char bracket) throws NotABracketException {
+        static Character getBracketPartner(char bracket) {
             if (bracketPartners.containsKey(bracket)) {
                 return bracketPartners.get(bracket);
             } else if (bracketPartners.containsValue(bracket)) {
                 return bracketPartners.getKey(bracket);
             }
-            throw new NotABracketException();
+            throw new IllegalArgumentException("input is not a bracket: " + bracket);
         }
     }
 }
