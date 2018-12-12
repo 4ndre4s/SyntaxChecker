@@ -8,24 +8,22 @@ public class SyntaxChecker {
         int lengthOfStringToCheck = stringToCheck.length();
         if (lengthOfStringToCheck == 0) {
             return true;
-        } else {
-            Stack<Character> leftBracketsInString = new Stack<>();
-            for (int i = 0; i < lengthOfStringToCheck; i++) {
-                char bracketCandidate = stringToCheck.charAt(i);
-                if (Brackets.isLeftBracket(bracketCandidate)) {
-                    leftBracketsInString.push(bracketCandidate);
-                } else if (Brackets.isRightBracket(bracketCandidate)) {
-                    if (leftBracketsInString.isEmpty()) {
-                        return false;
-                    } else {
-                        if (!(bracketCandidate == Brackets.getBracketPartner(leftBracketsInString.pop()))) {
-                            return false;
-                        }
-                    }
+        }
+        Stack<Character> leftBracketsInString = new Stack<>();
+        for (int i = 0; i < lengthOfStringToCheck; i++) {
+            char bracketCandidate = stringToCheck.charAt(i);
+            if (Brackets.isLeftBracket(bracketCandidate)) {
+                leftBracketsInString.push(bracketCandidate);
+            } else if (Brackets.isRightBracket(bracketCandidate)) {
+                if (leftBracketsInString.isEmpty()) {
+                    return false;
+                }
+                if (bracketCandidate != Brackets.getBracketPartner(leftBracketsInString.pop())) {
+                    return false;
                 }
             }
-            return leftBracketsInString.isEmpty();
         }
+        return leftBracketsInString.isEmpty();
     }
 
     private static class Brackets {
