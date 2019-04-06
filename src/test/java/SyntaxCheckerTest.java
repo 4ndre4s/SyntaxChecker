@@ -8,7 +8,7 @@ public class SyntaxCheckerTest {
     public void check_empty_true() {
         //arrange
         boolean expectedResult = true;
-        String input = "{}";
+        String input = "";
 
         //act
         boolean actualResult = new SyntaxChecker().check(input);
